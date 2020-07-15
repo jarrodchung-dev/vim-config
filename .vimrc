@@ -16,6 +16,8 @@ Plugin 'VundleVim/Vundle.vim'
 " [My Plugins]
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'mhartington/oceanic-next'
+Plugin 'altercation/vimi-colors-solarized'
 call vundle#end()
 
 filetype plugin on
@@ -88,20 +90,3 @@ set nrformats-=octal    "Interprets octal as decimal when incrementing numbers
 set shell               "The shell used to execute commands
 set spell               "Enables spellchecking
 set wildignore+=.pyc,.swp  "Ignores files with matching patterns
-
-" [Color Scheme]
-if (has("termguicolors"))
-    set termguicolors
-endif
-
-" colorscheme OceanicNext
-" let g:airliine_theme='oceanicnext'
-
-" [OceanicNext]
-"let g:oceanic_next_terminal_bold=1
-"let g:oceanic_next_terminal_italic=1
-"colorscheme OceanicNext
-
-"8
-"26
-"
