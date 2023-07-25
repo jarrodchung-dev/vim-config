@@ -1,3 +1,3 @@
-# Vim Configuration Files 
+# Vim Configuration Files
 
-Git repository for saving configuraiton files for Vim.
+Git repository of my Vim configuration and settings, which is currently only a `.vimrc`.
