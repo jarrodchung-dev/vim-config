@@ -1,92 +1,91 @@
-" [Vundle Config]
-
-" :PluginList - lists configured plugins
-" :PluginInstall - install plugins; append to update or just :PluginUpdate
-" :PluginSearch $foo - searches for foo; append ! to refresh local cache
-" :PluginClean - confirms removal of unused plugins; append ! to auto-approve
-
 set nocompatible
 filetype off
-" Sets runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
 
-call vundle#begin()
-" [Required]: let Vundle manage Vundle
-Plugin 'VundleVim/Vundle.vim'
-" [My Plugins]
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'mhartington/oceanic-next'
-Plugin 'altercation/vimi-colors-solarized'
-call vundle#end()
+" [Vim-Plug]
+if has('filetype')
+  filetype indent plugin on
+endif
 
-filetype plugin on
+if has('termguicolors')
+  set termguicolors
+endif
 
-" [General]
-set backspace=indent,eol,start  "Allows 'backspace' in INSERT
-set history=1000                "Number of saved lines in history
-set showmode                    "Shows incomplete commands
-set gcr=a:blinkon0              "Disables blinking cursor
-set visualbell                  "Disables sounds
-set autoread                    "Reloads files changed outside of vim
-set softtabstop=4
+syntax enable
 
-" [Indentation]
-set autoindent          "Newlines inherit identation from previous lines
-set expandtab           "Converts tabs to spaces
-set shiftround          "Rounds indentation to shiftwidth's nearest
-set shiftwidth=4        "Number of tab spaces
-set tabstop=4           "Indent using four spaces
+" [Default Shell]
+set shell=/opt/homebrew/bin/bash
 
-" [Search]
-set hlsearch    "Enables search highlighting
-set ignorecase  "Ignores case when searching
-set incsearch   "Shows partial matchces for incremental searches
-set smartcase   "Switches search to case-sensitve if query contains uppercase
+" [Plugins]
+call plug#begin('~/.vim/plugged')
+  Plug 'airblade/vim-gitgutter'
+  Plug 'scrooloose/nerdtree'
+  Plug 'tpope/vim-fugitive'
+  Plug 'vim-syntastic/syntastic'
+  Plug 'wojciechkepka/vim-github-dark'
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-repeat'
+  Plug 'jiangmiao/auto-pairs'
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'tpope/vim-commentary'
+  Plug 'sheerun/vim-polyglot'
+  Plug 'dikiaap/minimalist'
+call plug#end()
 
-" [Performance]
-set complete-=i     "Limit files search for auto-complete
-set lazyredraw      "Don't update screen during macro and script execution
+" [Settings]
+set autoindent
+set background=dark
+set backup
+set encoding=utf-8
+set esckeys
+set expandtab
+set fenc=utf-8
+set fileformats=unix,dos,mac
+set guifont=sudo:h14
+set guioptions+=c.t ruler
+set guioptions=T
+set guioptions=m
+set hlsearch
+set ignorecase
+set incsearch
+set noswapfile
+set number! relativenumber!
+set ruler
+set shiftwidth=2
+set showcmd
+set showmatch
+set smartcase
+set smartindent
+set softtabstop=2
+set t_Co=256
+set t_ut=
+set tabstop=2
+set termguicolors
+set timeoutlen=1000
+set ttimeoutlen=20
 
-" [Text Rendering]
-set display+=lastline   "Always tries to show paragraph's last line
-set encoding=utf-8      "Uses encoding that supports unicode
-set linebreak           "Avoids word wrap in middle of word
-set scrolloff=1         "Number of creen columns left/right
-syntax enable           "Enables syntax highlighting
-set wrap                "Enables line wrapping
+" [Syntastic]
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_python_checkers = ['black', 'isort']
 
-" [User Interface]
-set laststatus=2        "Always displays status bar
-set ruler               "Always shows cursors position
-set wildmenu            "Diplays command line tabe complete options as menu
-set tabpagemax=50       "Max number of tab pages opened from command line
-"set cursorline          "Highlight line currently under cursor
-set number              "Shows line numbers
-set relativenumber      "Shows current line number relative to all others
-set noerrorbells        "Disables beep on error
-set visualbell          "Flashes screen instead of beeping on errors
-set mouse=a             "Enables scrolling and resizing with mouse
-set title               "Sets window's title to current fiile being edited
-set background=dark     "Uses colors that suit dark backgrounds
+" [NERDTree]
+let NERDTreeIgnore=['__pycache__', '\.pyc$', '.pyo$']
+map <C-n> :NERDTreeToggle<CR>
 
-" [Code Folding]
-set foldmethod=indent   "Folds based on indentation levels
-set foldnestmax=3       "Only folds up to three nested levels
-set nofoldenable        "Disables folding by default
+let g:AutoPairsFlyMode = 0
+let g:AutoPairsShortcutBackInsert = '<M-b>'
 
-" [Miscellaneous]
-set autoread                   "Re-reads files if unmodified in Vim
-set backspace=indent,eol,start "Allows backspaces during INSERT mode
-set backupdir=~/.cache/vim     "Director to store backup files
-set confirm  "Displays confirmation dialog when closing unsaved file
-set dir=~/.cache/vim           "Directory to store swap files
-set formatoptions+=j           "Deletes comment characters when joining lines
-set hidden              "Hides files in the background instead of closing them
-set history=1000        "Sets undo history limit
-set nomodeline          "Ignore's file's mod lines to use .vimrc
-set noswapfile          "Disables file swapping
-set nrformats-=octal    "Interprets octal as decimal when incrementing numbers
-set shell               "The shell used to execute commands
-set spell               "Enables spellchecking
-set wildignore+=.pyc,.swp  "Ignores files with matching patterns
+" [autocmd FileType]
+autocmd FileType python setlocal shiftwidth=4 tabstop=4
+autocmd FileType html,css,javascript,typescript,json,markdown,yml,xml setlocal shiftwidth=2 tabstop=2
+autocmd FileType make setlocal noexpandtab tabstop=4 shiftwidth=4 softtabstop=0
+
+" [Color Scheme]"
+colorscheme ghdark
+highlight Normal ctermbg=233 guibg=#212121
+
+filetype plugin indent on
